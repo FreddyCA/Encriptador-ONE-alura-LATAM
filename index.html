@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador Alura-LATAM</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+    
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="imagenes/Logo.png" alt="Logo">
+        </div>
+    </header>
+
+    <main>
+        <div class="encriptador">
+            <div class="caja-izquierda">
+                <textarea autofocus spellcheck="false" id="entrada" class="texto-entrada"
+                    placeholder="Ingrese el texto aqui"></textarea>
+                <div class="buttons">
+                    <div class="info-encriptador">
+                        <span><iconify-icon icon="bi:exclamation-circle-fill"></iconify-icon> Solo letras minúsculas y
+                            sin acentos</span>
+                        <div class="btnRestricciones">
+                            <button class="btnPegar">Pegar</button>
+                            <button class="btnClear">Borrar</button>
+                        </div>
+                    </div>
+                    <div class="btn-Group">
+                        <button class="btnEncriptar">Encriptar</button>
+                        <button class="btnDesencriptar">Desencriptar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="caja-derecha">
+                <img src="imagenes/Muñeco.png" alt="muñeco" class="muneco">
+                <div class="texto-der">
+                    <p class="superior">Ningún mensaje fue encontrado</p>
+                    <p class="inferior">Ingresa el texto que desees encriptar o desencriptar.</p>
+                </div>
+
+                <textarea spellcheck="false" id="salida" class="texto-Salida texto-copiado"></textarea>
+                <button class="btnCopiar">Copiar</button>
+            </div>
+        </div>
+        <script src="app.js"></script>
+
+    </main>
+
+    <footer>
+        <div>
+            <a href="https://github.com/FreddyCA" target="_blank"><img src="imagenes/github.svg" alt="gtihub"></a>
+            <a href="https://www.linkedin.com/in/freddycoaricona/" target="_blank"><img src="imagenes/linkedin.svg" alt="linkedin"></a>
+        </div>
+        <h2>Desarrollado por Freddy Coaricona</h2>
+    </footer>
+</body>
+
+</html>
