@@ -10,6 +10,7 @@ const btnClear = document.querySelector(".btnClear");
 const restricciones = document.querySelector("span");
 const muneco = document.querySelector(".muneco");
 const texDer = document.querySelector(".texto-der");
+const sinResultado = document.querySelector('.superior')
 
 const inicio = () => {
   texDer.style.display = "block";
@@ -26,14 +27,17 @@ const colorTexto = (colorCopiar) => {
     btnCopiar.style.color = "#0a3871";
     btnCopiar.textContent = "Copiado";
     salida.style.color = "blue";
+    btnPegar.value = salida.value
     return;
   } else {
     btnCopiar.style.backgroundColor = "white";
     btnCopiar.style.color = "#0a3871";
     btnCopiar.textContent = "Copiar";
     salida.style.color = "#495749";
+    btnPegar.value = ''
   }
 };
+
 
 const soloMinusculas = document.querySelector(".texto-entrada");
 soloMinusculas.addEventListener("keypress", (e) => {
@@ -87,7 +91,7 @@ const verificacion = (e) => {
 };
 
 botonEncriptar.addEventListener("click", () => {
-  const textoEntrada = entrada.value;
+  const textoEntrada = entrada.value.toLowerCase();
   colorTexto();
   verificacion(textoEntrada);
   if (prueba) {
@@ -102,19 +106,31 @@ botonEncriptar.addEventListener("click", () => {
   }
 });
 
-const soloLetras = (e) => {
-  key = e.keyCode || e.which;
-};
-
 btnDesencriptar.addEventListener("click", () => {
-  const textoEntrada = entrada.value;
+  const textoEntrada = entrada.value.toLowerCase();
+  
   colorTexto();
   verificacion(textoEntrada);
   if (prueba) {
+    
     desencriptar(textoEntrada);
+    if (textoEntrada == salida.textContent) {
+      inicio()
+      sinResultado.textContent = "No se encontró un patrón para desencriptar"
+      return
+    } else {
+      salida.style.display = "block";
+    btnCopiar.style.display = "block";
+    
     sinModificacion();
+    muneco.style.display = "none";
+    texDer.style.display = "none";
     colorPegar();
+    return
+    }
+    
   }
+  
 });
 
 btnCopiar.addEventListener("click", () => {
@@ -122,20 +138,24 @@ btnCopiar.addEventListener("click", () => {
   copiarTexto(salida, colorCopiar);
 });
 
-const colorPegar = () => {
-  btnPegar.style.backgroundColor = "white";
-  btnPegar.style.color = "#0a3871";
-  btnPegar.style.border = "1px solid #0a3871";
-};
+btnPegar.addEventListener("click", (e) => {
+  entrada.value = btnPegar.value
+});
 
 btnClear.addEventListener("click", () => {
   entrada.value = "";
   entrada.focus();
 });
 
-btnPegar.addEventListener("click", () => {
-  entrada.value = salida.value;
-});
+const colorPegar = () => {
+  btnPegar.style.backgroundColor = "white";
+  btnPegar.style.color = "#0a3871";
+  btnPegar.style.border = "1px solid #0a3871";
+  sinResultado.textContent = "Ningún mensaje fue encontrado"
+};
+
+
+
 
 const sinModificacion = () => {
   salida.classList.remove("texto-copiado");
@@ -148,13 +168,19 @@ const copiarTexto = (salida, colorCopiar) => {
   salida.classList.remove("texto-Salida");
   salida.select();
   document.execCommand("copy");
+  salida.classList.remove("texto-copiado");
   salida.classList.add("texto-Salida");
   restricciones.style.display = "none";
   btnInfo.style.display = "block";
   btnPegar.style.backgroundColor = "#0A3871";
   btnPegar.style.color = "white";
+  entrada.focus();
   colorTexto(true);
+  
 };
+
+
+
 
 const desencriptar = (textoEntrada) => {
   let desEncriptado = textoEntrada.split("enter");
@@ -182,17 +208,13 @@ const encriptar = (textoEntrada) => {
   varArray.forEach((elemento, cont) => {
     if (elemento === "e") {
       elemento = "enter";
-    }
-    if (elemento === "i") {
+    } else if (elemento === "i") {
       elemento = "imes";
-    }
-    if (elemento === "a") {
+    } else if (elemento === "a") {
       elemento = "ai";
-    }
-    if (elemento === "o") {
+    } else if (elemento === "o") {
       elemento = "ober";
-    }
-    if (elemento === "u") {
+    } else if (elemento === "u") {
       elemento = "ufat";
     }
     return (newArray[cont] = elemento);

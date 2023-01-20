@@ -263,6 +263,10 @@ footer img {
   .btnCopiar {
     width: 90%;
   }
+  
+  button:hover {
+    transform: scale(1);
+  }
 }
 
 @media screen and (max-width: 375px) {
